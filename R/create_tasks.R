@@ -1,39 +1,6 @@
 library(dplyr)
 
 ########## WORK IN PROGRESS --------------------------------------
-
-operation <- "addition"
-## allowed values: "addition", "subtraction", "multiplication", "division"
-
-digits <- 7
-## allowed values: 1,2,3,4,5,6,7
-
-var_digits <- c(1,2,3,4,5,6,7)
-## allowed values: vector containing values 1 to digits
-### To Do: digits and var_digits need to be separately for terms a, b, c, r
-
-
-task_type <- 1
-## allowed values: dependent on operation
-## addition: 1,2,3,4,5
-## subtraction: 1,2,3
-## multiplication: 1,2,3
-## division: 1,2,3
-
-difficulty_param <- c(2,3,4)
-## allowed values: dependent on operation
-## addition: any combination of c(1,2,3,4,5,6,7) -> max value == digits
-## subtraction: any combination of c(1,2,3,4,5,6,7) -> max value == digits
-## multiplication: nothing yet
-## division: number of decimal digits as int
-
-zeros_allowed <- 2
-## allowed values: 0 to digits-1
-
-a_pool <- seq(111, 999)[grep(0, seq(111,999), invert = T)]
-b_pool <- seq(111, 999)[grep(0, seq(111,999), invert = T)]
-
-
 #################### FUNCTIONS ----------------------------------------
 
 get_numbers <- function(digits = 3, full = F){
