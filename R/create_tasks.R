@@ -9,17 +9,12 @@ get_numbers <- function(digits = 3, full = F){
   return(number_pool)
 }
 
-get_numbers(2, F)
-
 addition_task <- function(pool_a = get_numbers(2, F), pool_b = get_numbers(2, F)) {
   library(dplyr)
   my_items <- tibble(expand.grid(a = pool_a, b = pool_b, KEEP.OUT.ATTRS = F)) %>%
     mutate(c = a + b)
   return(my_items)
 }
-
-my_items <- addition_task(get_numbers(3,F), get_numbers(3,F)) %>%
-  filter(c < 10000)
 
 get_carry <- function(data, remove = F, name = "carry") {
   digits <- log10(data[[1,"a"]])+1
@@ -36,7 +31,6 @@ get_carry <- function(data, remove = F, name = "carry") {
       select(!paste0(name, seq(digits,1)))
   return(data)
 }
-get_carry(my_items)
 
 get_borrow <- function(data, remove = F, name = "borrow") {
   digits <- log10(data[[1,"a"]])+1
@@ -53,7 +47,21 @@ get_borrow <- function(data, remove = F, name = "borrow") {
       select(!paste0(name, seq(digits,1)))
   return(data)
 }
+
+# function(digits = 3, full = F)
+## This function gets you a vector with all numbers with x digits
+### full = include numbers with less than x digits
+get_numbers(2, F)
+
+
+# function(pool_a = get_numbers(2, F), pool_b = get_numbers(2, F))
+## This function constructs all addition possible addition tasks in a + b = c format
+### pool_a = 
+my_items <- addition_task(get_numbers(3,F), get_numbers(3,F)) %>%
+  filter(c < 10000)
+
 get_borrow(my_items)
+get_carry(my_items)
 
 
 my_items <- my_items %>%
