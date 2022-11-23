@@ -5,7 +5,7 @@ source(file.path("R", "create_tasks.R"))
 # function(digits = 3, full = F)
 ## This function gets you a vector with all numbers with x digits
 ### full = include numbers with less than x digits
-get_numbers(2, F)
+get_numbers(3, F)
 
 
 # function(pool_a = get_numbers(2, F), pool_b = get_numbers(2, F))
@@ -19,7 +19,7 @@ get_carry(my_items)
 
 
 my_items <- my_items %>%
-  get_carry(remove = F)
+  get_carry(remove = T)
 
 ##### Math Tasks 0 carry operations, 1 carry, 2 carry
 my_items <- addition_task(get_numbers(3,F), get_numbers(3,F)) %>%
