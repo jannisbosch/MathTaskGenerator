@@ -33,7 +33,7 @@ get_carry <- function(data, remove = F, name = "carry") {
 }
 
 get_borrow <- function(data, remove = F, name = "borrow") {
-  digits <- log10(data[[1,"a"]])+1
+  digits <- as.integer(log10(data[[1,"a"]])+1)
   for (i in seq(digits,1)) {
     if (i < digits) {
       subt <- data[,paste0(name, i+1)]
@@ -46,4 +46,13 @@ get_borrow <- function(data, remove = F, name = "borrow") {
       filter(rowSums(data[paste0(name, seq(digits,1))]) == 0) %>%
       select(!paste0(name, seq(digits,1)))
   return(data)
+}
+
+jspsych_items <- function(data, file = file.path("R", "jspsych_items.csv"), n_items = 20) {
+  sample_items <- sample(1:dim(data)[1], n_items)
+  jspsych_sample <- data[sample_items,] %>%
+    mutate(item_id = sample_items) %>%
+    mutate(text = paste0("{ questions: [{prompt: '", a, " + ", b, "  = ?', rows: 1, placeholder: 'Hier Ergebnis eintragen'}], data: { item_id: ", item_id, ", a: ", a, " , b: ", b, " , c: ", c, " }}, "))
+  
+  write.table(jspsych_sample[["text"]], file = file, col.names = F, quote = F, row.names = F)
 }

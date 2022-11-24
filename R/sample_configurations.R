@@ -40,3 +40,8 @@ my_items_hard <- my_items %>%
   get_carry() %>%
   filter(carry1 + carry2 + carry3 == 2) %>%
   select(!c(carry1,carry2,carry3))
+
+### Create jspsych Items
+jspsych_items(my_items_easy, file = file.path("R", "Easy Items.csv"), n_items = 1000)
+jspsych_items(my_items_medium, file = file.path("R", "Medium Items.csv"), n_items = 1000)
+jspsych_items(my_items_hard, file = file.path("R", "Hard Items.csv"), n_items = 1000)
